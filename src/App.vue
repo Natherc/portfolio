@@ -1,62 +1,77 @@
 <template>
-  <div id="app">
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Portfolio</span>
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <router-link to="/" class="mdl-navigation__link">Accueil</router-link>
-            <router-link to="/CV" class="mdl-navigation__link">CV</router-link>
-            <router-link to="/" class="mdl-navigation__link">Link</router-link>
-            <router-link to="/" class="mdl-navigation__link">Link</router-link>
-          </nav>
-        </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Portfolio</span>
-        <nav class="mdl-navigation">
-          <router-link to="/" class="mdl-navigation__link">Accueil</router-link>
-          <router-link to="/CV" class="mdl-navigation__link">CV</router-link>
-          <router-link to="/" class="mdl-navigation__link">Link</router-link>
-          <router-link to="/" class="mdl-navigation__link">Link</router-link>
-        </nav>
+  <v-app>
+    <div>
+      <v-toolbar color="blue">
+        <v-toolbar-side-icon@click="drawer = true"></v-toolbar-side-icon>
+        <v-toolbar-title>Portfolio</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn to="/" flat>Accueil</v-btn>
+          <v-btn to="/CV" flat>CV</v-btn>
+          <v-btn to="/who" flat>Qui suis-je ?</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+      <div>
+        <span>Portfolio</span>
+        <v-navigation-drawer
+         v-model="drawer"
+         temporary
+         absolute
+        >
+          <v-list>
+            <v-list-tile @click="$router.push({path: '/'})">
+              <v-list-tile-action>
+                <v-icon>home</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Accueil</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile @click="$router.push({path: '/CV'})">
+              <v-list-tile-action>
+                <v-icon>book</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>CV</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile @click="$router.push({path: '/who'})">
+              <v-list-tile-action>
+                <v-icon>person</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Qui suis-je ?</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-navigation-drawer>
       </div>
-      <main class="mdl-layout__content">
+      <main>
         <router-view></router-view>
       </main>
     </div>    
-  </div>
+  </v-app>
 </template>
 
 <script>
-import 'material-design-lite'
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      drawer: false
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://code.getmdl.io/1.2.1/material.blue-red.min.css');
 @import url('http://fonts.googleapis.com/css?family=Roboto:300,400,500,70');
 
 body {
   margin: 0;
 }
-.mdl-layout{
-  &__content{
-    background-color: white;
-  }
-  &-title{
-    padding: 0;
-  }
-}
-
-
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
